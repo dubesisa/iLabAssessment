@@ -75,7 +75,7 @@ public class WebTablePage extends BasePage {
 
     /**
      * Check if the user list table is displayed
-     * 
+     *
      * @return true if the user list table is displayed, false otherwise
      */
     public boolean isUserListTableDisplayed() {
@@ -94,21 +94,21 @@ public class WebTablePage extends BasePage {
 
     /**
      * Enter user details in the Add User form
-     * 
+     *
      * @param firstName First name
-     * @param lastName Last name
-     * @param userName User name
-     * @param password Password
-     * @param customer Customer selection (Company A, Company B, etc.)
-     * @param role Role selection (Admin, Customer, etc.)
-     * @param email Email address
+     * @param lastName  Last name
+     * @param userName  User name
+     * @param password  Password
+     * @param customer  Customer selection (Company A, Company B, etc.)
+     * @param role      Role selection (Admin, Customer, etc.)
+     * @param email     Email address
      * @param cellPhone Cell phone number
      */
-    public void enterUserDetails(String firstName, String lastName, String userName, 
-                               String password, String customer, String role, 
-                               String email, String cellPhone) {
+    public void enterUserDetails(String firstName, String lastName, String userName,
+                                 String password, String customer, String role,
+                                 String email, String cellPhone) {
         logger.info("Entering user details: " + firstName + " " + lastName);
-        
+
         // Fill in text fields
         sendKeys(firstNameInput, firstName);
         sendKeys(lastNameInput, lastName);
@@ -116,13 +116,13 @@ public class WebTablePage extends BasePage {
         sendKeys(passwordInput, password);
         sendKeys(emailInput, email);
         sendKeys(cellPhoneInput, cellPhone);
-        
+
         // Select role
         selectByVisibleText(roleSelect, role);
-        
+
         // Select customer radio button
         selectCustomer(customer);
-        
+
         logger.info("User details entered successfully");
     }
 
@@ -138,23 +138,23 @@ public class WebTablePage extends BasePage {
 
     /**
      * Select customer radio button based on customer name
-     * 
+     *
      * @param customerName Customer name (Company A, Company B, etc.)
      */
     private void selectCustomer(String customerName) {
         boolean found = false;
-        
+
         // Using dynamic locator with text to find the right radio button
         try {
             WebElement radioButton = driver.findElement(
-                By.xpath("//label[contains(text(), '" + customerName + "')]/../input[@type='radio']"));
+                    By.xpath("//label[contains(text(), '" + customerName + "')]/../input[@type='radio']"));
             click(radioButton);
             found = true;
             logger.info("Selected customer: " + customerName);
         } catch (Exception e) {
             logger.warn("Could not find radio button for customer: " + customerName);
         }
-        
+
         // Fallback: try each radio button in the list
         if (!found && !customerRadioButtons.isEmpty()) {
             click(customerRadioButtons.get(0));
@@ -164,19 +164,19 @@ public class WebTablePage extends BasePage {
 
     /**
      * Check if a user exists in the table
-     * 
+     *
      * @param firstName First name
-     * @param lastName Last name
+     * @param lastName  Last name
      * @return true if the user exists, false otherwise
      */
     public boolean isUserInTable(String firstName, String lastName) {
         // Wait for table to refresh
         wait.until(ExpectedConditions.visibilityOf(userTable));
-        
+
         // Create XPath to look for the user
-        String userXPath = "//table[contains(@class,'smart-table')]//tr[td[contains(text(),'" + 
-                           firstName + "')] and td[contains(text(),'" + lastName + "')]]";
-        
+        String userXPath = "//table[contains(@class,'smart-table')]//tr[td[contains(text(),'" +
+                firstName + "')] and td[contains(text(),'" + lastName + "')]]";
+
         try {
             WebElement userRow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(userXPath)));
             logger.info("User found in table: " + firstName + " " + lastName);
@@ -189,44 +189,44 @@ public class WebTablePage extends BasePage {
 
     /**
      * Get user details from the table
-     * 
+     *
      * @param firstName First name
-     * @param lastName Last name
+     * @param lastName  Last name
      * @return Map containing all user details from the table
      */
     public Map<String, String> getUserDetailsFromTable(String firstName, String lastName) {
         Map<String, String> userDetails = new HashMap<>();
-        
+
         // Create XPath to look for the user
-        String userXPath = "//table[contains(@class,'smart-table')]//tr[td[contains(text(),'" + 
-                           firstName + "')] and td[contains(text(),'" + lastName + "')]]";
-        
+        String userXPath = "//table[contains(@class,'smart-table')]//tr[td[contains(text(),'" +
+                firstName + "')] and td[contains(text(),'" + lastName + "')]]";
+
         try {
             WebElement userRow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(userXPath)));
             List<WebElement> cells = userRow.findElements(By.tagName("td"));
-            
+
             // Get column headers
             List<WebElement> headers = driver.findElements(By.cssSelector("table.smart-table th"));
-            
+
             // Map cell values to headers
             for (int i = 0; i < headers.size() && i < cells.size(); i++) {
                 String header = headers.get(i).getText();
                 String value = cells.get(i).getText();
                 userDetails.put(header, value);
             }
-            
+
             // Additional mapping for specific fields
             if (userDetails.containsKey("#")) userDetails.put("ID", userDetails.get("#"));
             if (userDetails.containsKey("First Name")) userDetails.put("FirstName", userDetails.get("First Name"));
             if (userDetails.containsKey("Last Name")) userDetails.put("LastName", userDetails.get("Last Name"));
             if (userDetails.containsKey("User Name")) userDetails.put("UserName", userDetails.get("User Name"));
-            
+
             logger.info("Retrieved user details from table: " + userDetails);
-            
+
         } catch (Exception e) {
             logger.error("Failed to get user details from table: " + e.getMessage());
         }
-        
+
         return userDetails;
     }
 }

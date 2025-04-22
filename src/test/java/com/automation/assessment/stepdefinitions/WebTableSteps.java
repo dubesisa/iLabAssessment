@@ -57,12 +57,12 @@ public class WebTableSteps {
     public void iEnterUserDetails(DataTable dataTable) {
         List<Map<String, String>> userDetails = dataTable.asMaps(String.class, String.class);
         Map<String, String> user = userDetails.get(0);
-        
+
         // Replace timestamp placeholder in username if present
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         String userName = user.get("UserName").replace("{TS}", timestamp);
         user.put("UserName", userName);
-        
+
         logger.info("Entering user details: " + user);
         webTablePage.enterUserDetails(
                 user.get("FirstName"),
@@ -74,7 +74,7 @@ public class WebTableSteps {
                 user.get("Email"),
                 user.get("CellPhone")
         );
-        
+
         // Store for later validation
         lastAddedUser = user;
     }
@@ -88,8 +88,8 @@ public class WebTableSteps {
     @Then("the user should be added to the User List Table")
     public void theUserShouldBeAddedToTheUserListTable() {
         logger.info("Verifying user is added to the table");
-        Assert.assertTrue("User not found in table", 
-            webTablePage.isUserInTable(lastAddedUser.get("FirstName"), lastAddedUser.get("LastName")));
+        Assert.assertTrue("User not found in table",
+                webTablePage.isUserInTable(lastAddedUser.get("FirstName"), lastAddedUser.get("LastName")));
     }
 
     @And("the user details should match the entered data")
@@ -97,23 +97,23 @@ public class WebTableSteps {
         logger.info("Verifying user details match entered data");
         Map<String, String> userDetailsFromTable = webTablePage.getUserDetailsFromTable(
                 lastAddedUser.get("FirstName"), lastAddedUser.get("LastName"));
-        
-        Assert.assertEquals("First name doesn't match", 
+
+        Assert.assertEquals("First name doesn't match",
                 lastAddedUser.get("FirstName"), userDetailsFromTable.get("FirstName"));
-        Assert.assertEquals("Last name doesn't match", 
+        Assert.assertEquals("Last name doesn't match",
                 lastAddedUser.get("LastName"), userDetailsFromTable.get("LastName"));
-        Assert.assertEquals("User name doesn't match", 
+        Assert.assertEquals("User name doesn't match",
                 lastAddedUser.get("UserName"), userDetailsFromTable.get("UserName"));
         // We can't verify password as it's masked/not displayed in the table
-        Assert.assertEquals("Customer doesn't match", 
+        Assert.assertEquals("Customer doesn't match",
                 lastAddedUser.get("Customer"), userDetailsFromTable.get("Customer"));
-        Assert.assertEquals("Role doesn't match", 
+        Assert.assertEquals("Role doesn't match",
                 lastAddedUser.get("Role"), userDetailsFromTable.get("Role"));
-        Assert.assertEquals("Email doesn't match", 
+        Assert.assertEquals("Email doesn't match",
                 lastAddedUser.get("Email"), userDetailsFromTable.get("Email"));
-        Assert.assertEquals("Cell phone doesn't match", 
+        Assert.assertEquals("Cell phone doesn't match",
                 lastAddedUser.get("CellPhone"), userDetailsFromTable.get("CellPhone"));
-                
+
         logger.info("User details successfully verified");
     }
 
@@ -121,14 +121,14 @@ public class WebTableSteps {
     public void iAddUsersFromCSVDataFile() {
         logger.info("Adding users from CSV data file");
         List<Map<String, String>> users = csvDataReader.readCSVFile("src/test/resources/testdata/testdata.csv");
-        
+
         for (Map<String, String> user : users) {
             // Add timestamp to username to ensure uniqueness
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
             user.put("UserName", user.get("UserName") + timestamp);
-            
+
             webTablePage.clickAddUserButton();
-            
+
             webTablePage.enterUserDetails(
                     user.get("FirstName"),
                     user.get("LastName"),
@@ -139,16 +139,16 @@ public class WebTableSteps {
                     user.get("Email"),
                     user.get("CellPhone")
             );
-            
+
             webTablePage.clickSaveButton();
-            
+
             // Store last added user for verification
             lastAddedUser = user;
-            
+
             // Verify user was added
-            Assert.assertTrue("User not found in table after adding from CSV", 
-                webTablePage.isUserInTable(user.get("FirstName"), user.get("LastName")));
-            
+            Assert.assertTrue("User not found in table after adding from CSV",
+                    webTablePage.isUserInTable(user.get("FirstName"), user.get("LastName")));
+
             logger.info("Successfully added user from CSV: " + user.get("FirstName") + " " + user.get("LastName"));
         }
     }
@@ -157,14 +157,14 @@ public class WebTableSteps {
     public void iAddUsersFromJSONDataFile() {
         logger.info("Adding users from JSON data file");
         List<Map<String, String>> users = jsonDataReader.readJsonFile("src/test/resources/testdata/testdata.json", "users");
-        
+
         for (Map<String, String> user : users) {
             // Add timestamp to username to ensure uniqueness
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
             user.put("userName", user.get("userName") + timestamp);
-            
+
             webTablePage.clickAddUserButton();
-            
+
             webTablePage.enterUserDetails(
                     user.get("firstName"),
                     user.get("lastName"),
@@ -175,16 +175,16 @@ public class WebTableSteps {
                     user.get("email"),
                     user.get("cellPhone")
             );
-            
+
             webTablePage.clickSaveButton();
-            
+
             // Store last added user for verification
             lastAddedUser = user;
-            
+
             // Verify user was added
-            Assert.assertTrue("User not found in table after adding from JSON", 
-                webTablePage.isUserInTable(user.get("firstName"), user.get("lastName")));
-            
+            Assert.assertTrue("User not found in table after adding from JSON",
+                    webTablePage.isUserInTable(user.get("firstName"), user.get("lastName")));
+
             logger.info("Successfully added user from JSON: " + user.get("firstName") + " " + user.get("lastName"));
         }
     }
@@ -192,11 +192,11 @@ public class WebTableSteps {
     @Then("all users should be added to the User List Table")
     public void allUsersShouldBeAddedToTheUserListTable() {
         logger.info("Verifying all users were added to the table");
-        Assert.assertTrue("Last user not found in table", 
-            webTablePage.isUserInTable(lastAddedUser.get("FirstName") != null ? 
-                lastAddedUser.get("FirstName") : lastAddedUser.get("firstName"), 
-                lastAddedUser.get("LastName") != null ? 
-                lastAddedUser.get("LastName") : lastAddedUser.get("lastName")));
+        Assert.assertTrue("Last user not found in table",
+                webTablePage.isUserInTable(lastAddedUser.get("FirstName") != null ?
+                                lastAddedUser.get("FirstName") : lastAddedUser.get("firstName"),
+                        lastAddedUser.get("LastName") != null ?
+                                lastAddedUser.get("LastName") : lastAddedUser.get("lastName")));
         logger.info("Successfully verified users were added to the table");
     }
 }

@@ -108,9 +108,9 @@ public class DogAPISteps {
         logger.info("Validating image URL is valid");
         String imageUrl = response.jsonPath().getString("message");
         // Validate URL format using regex for a basic URL pattern
-        Assert.assertTrue("Image URL is not valid", 
+        Assert.assertTrue("Image URL is not valid",
                 imageUrl.matches("^https?://.*\\.(jpg|jpeg|png|gif)$"));
-        
+
         // Optionally, verify the image is accessible
         Response imageResponse = apiUtils.makeGetRequest(imageUrl);
         Assert.assertEquals("Image URL is not accessible", 200, imageResponse.getStatusCode());

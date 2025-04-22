@@ -20,7 +20,7 @@ public class WebDriverManager {
     /**
      * Get the WebDriver instance for the current thread.
      * If none exists, a new one will be created.
-     * 
+     *
      * @return WebDriver instance
      */
     public static WebDriver getDriver() {
@@ -29,7 +29,7 @@ public class WebDriverManager {
         }
         return driverThreadLocal.get();
     }
-    
+
     /**
      * Initialize a new WebDriver instance based on configuration
      */
@@ -38,11 +38,11 @@ public class WebDriverManager {
         boolean headless = ConfigReader.isHeadless();
         int implicitWaitSeconds = ConfigReader.getImplicitWaitSeconds();
         int pageLoadTimeoutSeconds = ConfigReader.getPageLoadTimeoutSeconds();
-        
+
         WebDriver driver;
-        
+
         logger.info("Initializing WebDriver for browser: " + browser + " (headless: " + headless + ")");
-        
+
         switch (browser) {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -54,7 +54,7 @@ public class WebDriverManager {
                 chromeOptions.addArguments("--no-sandbox");
                 driver = new ChromeDriver(chromeOptions);
                 break;
-                
+
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 if (headless) {
@@ -62,7 +62,7 @@ public class WebDriverManager {
                 }
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
-                
+
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (headless) {
@@ -70,21 +70,21 @@ public class WebDriverManager {
                 }
                 driver = new EdgeDriver(edgeOptions);
                 break;
-                
+
             case "safari":
                 driver = new SafariDriver();
                 break;
-                
+
             default:
                 logger.warn("Unsupported browser: " + browser + ". Using Chrome as default.");
                 driver = new ChromeDriver();
         }
-        
+
         // Configure timeouts
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeoutSeconds));
         driver.manage().window().maximize();
-        
+
         // Store in ThreadLocal
         driverThreadLocal.set(driver);
         logger.info("WebDriver initialized successfully");

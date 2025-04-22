@@ -15,7 +15,7 @@ public class APIUtils {
 
     /**
      * Make a GET request to the specified URL
-     * 
+     *
      * @param url URL to make the GET request to
      * @return Response object containing the response details
      */
@@ -29,8 +29,8 @@ public class APIUtils {
 
     /**
      * Make a GET request with query parameters
-     * 
-     * @param url URL to make the GET request to
+     *
+     * @param url         URL to make the GET request to
      * @param queryParams Map of query parameters
      * @return Response object containing the response details
      */
@@ -45,8 +45,8 @@ public class APIUtils {
 
     /**
      * Make a POST request with a JSON body
-     * 
-     * @param url URL to make the POST request to
+     *
+     * @param url  URL to make the POST request to
      * @param body JSON body to include in the request
      * @return Response object containing the response details
      */
@@ -61,7 +61,7 @@ public class APIUtils {
 
     /**
      * Get all dog breeds
-     * 
+     *
      * @return Response object containing all dog breeds
      */
     public Response getAllBreeds() {
@@ -72,7 +72,7 @@ public class APIUtils {
 
     /**
      * Get all sub-breeds for a specific breed
-     * 
+     *
      * @param breed Dog breed to get sub-breeds for
      * @return Response object containing all sub-breeds for the specified breed
      */
@@ -84,7 +84,7 @@ public class APIUtils {
 
     /**
      * Get a random image for a specific breed
-     * 
+     *
      * @param breed Dog breed to get random image for
      * @return Response object containing a random image URL for the specified breed
      */
@@ -96,8 +96,8 @@ public class APIUtils {
 
     /**
      * Get a random image for a specific sub-breed
-     * 
-     * @param breed Main dog breed
+     *
+     * @param breed    Main dog breed
      * @param subBreed Sub-breed to get random image for
      * @return Response object containing a random image URL for the specified sub-breed
      */
@@ -109,7 +109,7 @@ public class APIUtils {
 
     /**
      * Get multiple random images for a specific breed
-     * 
+     *
      * @param breed Dog breed to get random images for
      * @param count Number of random images to get
      * @return Response object containing random image URLs for the specified breed

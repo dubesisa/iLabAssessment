@@ -12,9 +12,9 @@ import java.time.Duration;
 
 public class BasePage {
     private static final Logger logger = LogManager.getLogger(BasePage.class);
+    private static final int DEFAULT_TIMEOUT = 10;
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private static final int DEFAULT_TIMEOUT = 10;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -24,7 +24,7 @@ public class BasePage {
 
     /**
      * Wait for element to be clickable and click it
-     * 
+     *
      * @param element WebElement to click
      */
     protected void click(WebElement element) {
@@ -40,7 +40,7 @@ public class BasePage {
 
     /**
      * Wait for element to be visible and click it by locator
-     * 
+     *
      * @param locator By locator to find the element
      */
     protected void click(By locator) {
@@ -56,9 +56,9 @@ public class BasePage {
 
     /**
      * Wait for element to be visible and enter text
-     * 
+     *
      * @param element WebElement to enter text into
-     * @param text Text to enter
+     * @param text    Text to enter
      */
     protected void sendKeys(WebElement element, String text) {
         try {
@@ -74,9 +74,9 @@ public class BasePage {
 
     /**
      * Wait for element to be visible and enter text by locator
-     * 
+     *
      * @param locator By locator to find the element
-     * @param text Text to enter
+     * @param text    Text to enter
      */
     protected void sendKeys(By locator, String text) {
         try {
@@ -92,8 +92,8 @@ public class BasePage {
 
     /**
      * Select option from dropdown by visible text
-     * 
-     * @param element Select WebElement
+     *
+     * @param element     Select WebElement
      * @param visibleText Text of the option to select
      */
     protected void selectByVisibleText(WebElement element, String visibleText) {
@@ -110,7 +110,7 @@ public class BasePage {
 
     /**
      * Wait for element to be visible
-     * 
+     *
      * @param element WebElement to wait for
      * @return The WebElement once it's visible
      */
@@ -120,7 +120,7 @@ public class BasePage {
 
     /**
      * Wait for element to be visible by locator
-     * 
+     *
      * @param locator By locator to find the element
      * @return The WebElement once it's visible
      */
@@ -130,7 +130,7 @@ public class BasePage {
 
     /**
      * Check if element is displayed
-     * 
+     *
      * @param element WebElement to check
      * @return true if element is displayed, false otherwise
      */
@@ -144,7 +144,7 @@ public class BasePage {
 
     /**
      * Check if element is displayed by locator
-     * 
+     *
      * @param locator By locator to find the element
      * @return true if element is displayed, false otherwise
      */
@@ -158,7 +158,7 @@ public class BasePage {
 
     /**
      * Get text from element
-     * 
+     *
      * @param element WebElement to get text from
      * @return Text of the element
      */
@@ -174,7 +174,7 @@ public class BasePage {
 
     /**
      * Get text from element by locator
-     * 
+     *
      * @param locator By locator to find the element
      * @return Text of the element
      */
@@ -190,7 +190,7 @@ public class BasePage {
 
     /**
      * Get element description for logging
-     * 
+     *
      * @param element WebElement
      * @return Description of the element
      */
@@ -200,9 +200,9 @@ public class BasePage {
             String name = element.getAttribute("name");
             String className = element.getAttribute("class");
             String tag = element.getTagName();
-            
+
             StringBuilder description = new StringBuilder(tag);
-            
+
             if (id != null && !id.isEmpty()) {
                 description.append("[id=").append(id).append("]");
             } else if (name != null && !name.isEmpty()) {
@@ -210,7 +210,7 @@ public class BasePage {
             } else if (className != null && !className.isEmpty()) {
                 description.append("[class=").append(className).append("]");
             }
-            
+
             return description.toString();
         } catch (Exception e) {
             return "Unknown Element";
@@ -219,7 +219,7 @@ public class BasePage {
 
     /**
      * Scroll element into view
-     * 
+     *
      * @param element WebElement to scroll to
      */
     protected void scrollIntoView(WebElement element) {
@@ -233,9 +233,9 @@ public class BasePage {
 
     /**
      * Execute JavaScript
-     * 
+     *
      * @param script JavaScript to execute
-     * @param args Arguments for the script
+     * @param args   Arguments for the script
      * @return Result of the script execution
      */
     protected Object executeJavaScript(String script, Object... args) {
@@ -249,7 +249,7 @@ public class BasePage {
 
     /**
      * Check if element exists
-     * 
+     *
      * @param locator By locator to find the element
      * @return true if element exists, false otherwise
      */

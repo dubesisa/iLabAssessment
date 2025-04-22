@@ -40,16 +40,16 @@ public class Hooks {
             // Take screenshot
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "Screenshot-" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
-            
+
             // Also save to disk for reference
             try {
                 File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                String filePath = "test-output/screenshots/" + scenario.getName().replaceAll("\\s+", "_") + 
-                                  "_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".png";
-                
+                String filePath = "test-output/screenshots/" + scenario.getName().replaceAll("\\s+", "_") +
+                        "_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".png";
+
                 // Ensure directory exists
                 Files.createDirectories(Paths.get("test-output/screenshots/"));
-                
+
                 FileUtils.copyFile(screenshotFile, new File(filePath));
                 logger.info("Screenshot saved to: " + filePath);
             } catch (IOException e) {
@@ -66,7 +66,7 @@ public class Hooks {
             scenario.attach(screenshot, "image/png", "FailureScreenshot");
             logger.info("Scenario failed, screenshot attached");
         }
-        
+
         if (driver != null) {
             WebDriverManager.quitDriver();
             logger.info("Web driver quit successfully");
