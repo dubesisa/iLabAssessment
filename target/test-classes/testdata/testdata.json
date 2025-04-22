@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "firstName": "Robert",
+      "lastName": "Johnson",
+      "userName": "rjohnson",
+      "password": "pass123",
+      "customer": "Company C",
+      "role": "Admin",
+      "email": "robert@example.com",
+      "cellPhone": "1112223333"
+    },
+    {
+      "firstName": "Emily",
+      "lastName": "Williams",
+      "userName": "ewilliams",
+      "password": "pass456",
+      "customer": "Company D",
+      "role": "Customer",
+      "email": "emily@example.com",
+      "cellPhone": "4445556666"
+    },
+    {
+      "firstName": "Michael",
+      "lastName": "Brown",
+      "userName": "mbrown",
+      "password": "pass789",
+      "customer": "Company E",
+      "role": "Sales",
+      "email": "michael@example.com",
+      "cellPhone": "7778889999"
+    }
+  ]
+}

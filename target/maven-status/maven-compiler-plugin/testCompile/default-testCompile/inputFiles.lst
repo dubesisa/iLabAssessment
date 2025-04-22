@@ -1,0 +1,12 @@
+/home/runner/workspace/src/test/java/com/automation/assessment/stepdefinitions/DogAPISteps.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/WebDriverManager.java
+/home/runner/workspace/src/test/java/com/automation/assessment/stepdefinitions/WebTableSteps.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/CSVDataReader.java
+/home/runner/workspace/src/test/java/com/automation/assessment/pageobjects/BasePage.java
+/home/runner/workspace/src/test/java/com/automation/assessment/stepdefinitions/Hooks.java
+/home/runner/workspace/src/test/java/com/automation/assessment/runners/TestRunner.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/ExcelDataReader.java
+/home/runner/workspace/src/test/java/com/automation/assessment/pageobjects/WebTablePage.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/APIUtils.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/ConfigReader.java
+/home/runner/workspace/src/test/java/com/automation/assessment/utils/JsonDataReader.java

@@ -1,0 +1,4 @@
+FirstName,LastName,UserName,Password,Customer,Role,Email,CellPhone
+David,Miller,dmiller,pass123,Company F,Admin,david@example.com,1231231234
+Sarah,Jones,sjones,pass456,Company G,Customer,sarah@example.com,2342342345
+James,Wilson,jwilson,pass789,Company H,Sales,james@example.com,3453453456
