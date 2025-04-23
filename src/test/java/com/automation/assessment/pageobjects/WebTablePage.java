@@ -135,6 +135,21 @@ public class WebTablePage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(addUserButton);
         logger.info("Clicked Save button");
     }
+     /**
+     * Generate unique username based on timestamp and random characters
+     * @return Unique username
+     */
+    public static String generateUniqueUsername() {
+        // Create a shorter, more readable unique username
+        long timestamp = System.currentTimeMillis() % 10000; // Last 4 digits of timestamp
+        String randomChars = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
+        String username = "test_user_" + timestamp + "_" + randomChars;
+        
+        // Print the generated username for debugging
+        System.out.println("Generated unique username: " + username);
+        
+        return username;
+    }
 
     /**
      * Select customer radio button based on customer name
