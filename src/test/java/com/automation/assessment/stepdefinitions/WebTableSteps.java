@@ -28,8 +28,6 @@ public class WebTableSteps {
     public WebTableSteps() {
         driver = WebDriverManager.getDriver();
         webTablePage = new WebTablePage(driver);
-        jsonDataReader = new JsonDataReader();
-        csvDataReader = new CSVDataReader();
     }
 
     @Given("I navigate to the web table application")
