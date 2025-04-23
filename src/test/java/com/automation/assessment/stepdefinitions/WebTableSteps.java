@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import java.util.Random;
+import java.util.UUID;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
