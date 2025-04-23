@@ -53,9 +53,7 @@ public class WebTableSteps {
         List<Map<String, String>> userDetails = dataTable.asMaps(String.class, String.class);
         Map<String, String> user = userDetails.get(0);
 
-        // Replace timestamp placeholder in username if present
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String userName = user.get("UserName").replace("{TS}", timestamp);
+        String userName = webTablePage.generateUniqueUsername()
         user.put("UserName", userName);
 
         logger.info("Entering user details: " + user);
