@@ -7,7 +7,5 @@
 - JUnit (Test Runner)
 - ExtentReports (Reporting)
 - Jackson (JSON Parsing)
-- OpenCSV (CSV Parsing)
 - Apache POI (Excel Parsing)
 - Log4j (Logging)
-
