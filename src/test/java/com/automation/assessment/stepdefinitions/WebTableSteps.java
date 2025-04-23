@@ -1,8 +1,6 @@
 package com.automation.assessment.stepdefinitions;
 
 import com.automation.assessment.pageobjects.WebTablePage;
-import com.automation.assessment.utils.CSVDataReader;
-import com.automation.assessment.utils.JsonDataReader;
 import com.automation.assessment.utils.WebDriverManager;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -24,8 +22,7 @@ public class WebTableSteps {
     private static final Logger logger = LogManager.getLogger(WebTableSteps.class);
     private final WebDriver driver;
     private final WebTablePage webTablePage;
-    private final JsonDataReader jsonDataReader;
-    private final CSVDataReader csvDataReader;
+
     private Map<String, String> lastAddedUser;
 
     public WebTableSteps() {
