@@ -29,7 +29,7 @@ public class WebTablePage extends BasePage {
     private List<WebElement> tableRows;
 
     // Add User button
-    @FindBy(css = "button.btn-link[type='add']")
+    @FindBy(xpath=("//h3[text()='Add User']")
     private WebElement addUserButton;
 
     // Add User form elements
@@ -88,7 +88,7 @@ public class WebTablePage extends BasePage {
     public void clickAddUserButton() {
         click(addUserButton);
         // Wait for modal title to be visible
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[text()='Add User']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addUserButton));
         logger.info("Clicked Add User button");
     }
 
@@ -132,7 +132,7 @@ public class WebTablePage extends BasePage {
     public void clickSaveButton() {
         click(saveButton);
         // Wait for modal to close
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h3[text()='Add User']")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(addUserButton);
         logger.info("Clicked Save button");
     }
 
